@@ -22,7 +22,7 @@ function initNoBtnPosition() {
 window.addEventListener('DOMContentLoaded', initNoBtnPosition);
 window.addEventListener('resize', initNoBtnPosition);
 
-// 1. Убегающая кнопка "НЕТ" (для мыши и тачскрина)
+// 1. Убегающая кнопка "НЕТ"
 function moveButton(e) {
     if (e) {
         e.preventDefault();
