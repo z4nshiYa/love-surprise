@@ -10,7 +10,7 @@ const winMessage = document.getElementById('win-message');
 const bgMusic = document.getElementById('bgMusic');
 
 let score = 0;
-const targetScore = 30; // 30 очков
+const targetScore = 67 // 30 очков
 let gameInterval;
 
 // Инициализация позиции кнопки "НЕТ"
