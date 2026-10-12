@@ -1,0 +1,280 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffdde1;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    user-select: none;
+}
+
+.card {
+    background: white;
+    padding: 50px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.5s;
+}
+
+h1 {
+    color: #ff4d6d;
+    margin-bottom: 30px;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+    animation: pulse 1.5s infinite;
+}
+
+#noBtn {
+    background-color: #ccc;
+    color: #444;
+    position: absolute;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Экран 2: "Я тебя тоже" */
+#happy-screen {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#happy-screen h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+    animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-15px); }
+}
+
+.photo-container {
+    margin: 10px 0;
+}
+
+#myFace {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    animation: emojiBeat 1.2s infinite ease-in-out alternate;
+}
+
+@keyframes emojiBeat {
+    0% { transform: scale(0.95) rotate(-3deg); }
+    100% { transform: scale(1.05) rotate(3deg); }
+}
+
+.hearts-bg {
+    font-size: 26px;
+    margin-top: 10px;
+}
+
+/* Блок отсчёта */
+#timer-box {
+    margin-top: 25px;
+    font-size: 20px;
+    color: #ff4d6d;
+    font-weight: bold;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+#countdown {
+    font-size: 24px;
+    color: #c9184a;
+}
+
+/* Экран 3: Мини-игра */
+#game-screen {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.game-header {
+    margin-top: 20px;
+    text-align: center;
+    z-index: 10;
+}
+
+.game-header h2 {
+    color: #ff4d6d;
+    margin: 0;
+    font-size: 26px;
+}
+
+.score {
+    font-size: 22px;
+    color: #555;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+#game-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Летающие элементы */
+.floating-item {
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+    animation: floatUp 3.2s linear forwards;
+    transition: transform 0.1s;
+}
+
+.floating-item:active {
+    transform: scale(1.3);
+}
+
+.floating-heart {
+    font-size: 45px;
+}
+
+.floating-face {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.7));
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(105vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-15vh) rotate(360deg);
+        opacity: 0.2;
+    }
+}
+
+/* Всплывающие очки (+1 и +3) */
+.popup-score {
+    position: absolute;
+    font-weight: bold;
+    font-size: 26px;
+    pointer-events: none;
+    animation: fadeAndRise 0.8s ease-out forwards;
+    z-index: 50;
+}
+
+.popup-heart {
+    color: #ff4d6d;
+}
+
+.popup-face {
+    color: #ff0055;
+    font-size: 32px;
+}
+
+@keyframes fadeAndRise {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.4);
+    }
+}
+
+/* Финал: сообщение победы строго по центру */
+#win-message {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    background: white;
+    padding: 30px 45px;
+    border-radius: 25px;
+    font-size: 28px;
+    color: #ff4d6d;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 12px 45px rgba(255, 77, 109, 0.35);
+    z-index: 99999 !important;
+    max-width: 90vw;
+    width: max-content;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+/* Романтичные кляксы со словами */
+.love-blob {
+    position: fixed;
+    z-index: 9999;
+    padding: 12px 24px;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    font-size: 22px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+    animation: popBlob 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+               floatBlob 3s ease-in-out infinite alternate;
+}
+
+@keyframes popBlob {
+    0% {
+        transform: scale(0) rotate(-15deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(var(--rot, 0deg));
+        opacity: 0.95;
+    }
+}
+
+@keyframes floatBlob {
+    0% {
+        transform: translateY(0px) rotate(var(--rot, 0deg));
+    }
+    100% {
+        transform: translateY(-12px) rotate(var(--rot, 0deg));
+    }
+}
