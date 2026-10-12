@@ -1,6 +1,12 @@
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     margin: 0;
     height: 100vh;
+    height: 100dvh; /* Поддержка плавающей шторки мобильных браузеров */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,36 +14,46 @@ body {
     font-family: 'Arial', sans-serif;
     overflow: hidden;
     user-select: none;
+    -webkit-user-select: none;
+    touch-action: none; /* Запрет случайного зума и скролла страницы */
 }
 
+/* Карточка вопроса */
 .card {
     background: white;
-    padding: 50px;
+    padding: 35px 25px;
     border-radius: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: 0.5s;
+    width: 90%;
+    max-width: 420px;
+    position: relative;
+    z-index: 10;
 }
 
 h1 {
     color: #ff4d6d;
-    margin-bottom: 30px;
+    margin: 0 0 25px 0;
+    font-size: 26px;
+    line-height: 1.3;
 }
 
 .btns {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 15px;
+    min-height: 60px;
 }
 
 button {
-    padding: 15px 40px;
-    font-size: 20px;
+    padding: 14px 28px;
+    font-size: 18px;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.2s;
+    touch-action: manipulation;
 }
 
 #yesBtn {
@@ -47,14 +63,16 @@ button {
 }
 
 #noBtn {
-    background-color: #ccc;
+    background-color: #e0e0e0;
     color: #444;
-    position: absolute;
+    position: fixed;
+    z-index: 20;
+    transition: left 0.15s ease-out, top 0.15s ease-out;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    50% { transform: scale(1.08); }
     100% { transform: scale(1); }
 }
 
@@ -69,17 +87,20 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    width: 95%;
+    max-width: 400px;
 }
 
 #happy-screen h1 {
-    font-size: 48px;
-    margin-bottom: 10px;
+    font-size: 32px;
+    margin-bottom: 15px;
     animation: bounce 0.6s infinite alternate;
 }
 
 @keyframes bounce {
     from { transform: translateY(0); }
-    to { transform: translateY(-15px); }
+    to { transform: translateY(-10px); }
 }
 
 .photo-container {
@@ -89,6 +110,8 @@ button {
 #myFace {
     width: 140px;
     height: 140px;
+    max-width: 45vw;
+    max-height: 45vw;
     object-fit: contain;
     animation: emojiBeat 1.2s infinite ease-in-out alternate;
 }
@@ -103,20 +126,20 @@ button {
     margin-top: 10px;
 }
 
-/* Блок отсчёта */
+/* Блок таймера */
 #timer-box {
-    margin-top: 25px;
-    font-size: 20px;
+    margin-top: 20px;
+    font-size: 17px;
     color: #ff4d6d;
     font-weight: bold;
     background: white;
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 #countdown {
-    font-size: 24px;
+    font-size: 20px;
     color: #c9184a;
 }
 
@@ -124,6 +147,7 @@ button {
 #game-screen {
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -131,19 +155,21 @@ button {
 }
 
 .game-header {
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: center;
     z-index: 10;
+    pointer-events: none;
+    padding: 0 10px;
 }
 
 .game-header h2 {
     color: #ff4d6d;
     margin: 0;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 .score {
-    font-size: 22px;
+    font-size: 18px;
     color: #555;
     margin-top: 5px;
     font-weight: bold;
@@ -163,23 +189,20 @@ button {
     position: absolute;
     cursor: pointer;
     user-select: none;
+    -webkit-user-select: none;
     animation: floatUp 3.2s linear forwards;
-    transition: transform 0.1s;
-}
-
-.floating-item:active {
-    transform: scale(1.3);
+    touch-action: manipulation;
 }
 
 .floating-heart {
-    font-size: 45px;
+    font-size: 42px;
 }
 
 .floating-face {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
-    filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.7));
+    filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.6));
 }
 
 @keyframes floatUp {
@@ -197,84 +220,72 @@ button {
 .popup-score {
     position: absolute;
     font-weight: bold;
-    font-size: 26px;
+    font-size: 24px;
     pointer-events: none;
     animation: fadeAndRise 0.8s ease-out forwards;
     z-index: 50;
 }
 
-.popup-heart {
-    color: #ff4d6d;
-}
-
-.popup-face {
-    color: #ff0055;
-    font-size: 32px;
-}
+.popup-heart { color: #ff4d6d; }
+.popup-face { color: #ff0055; font-size: 28px; }
 
 @keyframes fadeAndRise {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-50px) scale(1.4);
-    }
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(-40px) scale(1.3); }
 }
 
-/* Финал: сообщение победы строго по центру */
+/* Финальное сообщение: адаптировано под узкие экраны */
 #win-message {
     position: fixed !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     background: white;
-    padding: 30px 45px;
+    padding: 24px 20px;
     border-radius: 25px;
-    font-size: 28px;
+    font-size: 20px;
+    line-height: 1.4;
     color: #ff4d6d;
     font-weight: bold;
     text-align: center;
     box-shadow: 0 12px 45px rgba(255, 77, 109, 0.35);
-    z-index: 99999 !important;
-    max-width: 90vw;
-    width: max-content;
+    z-index: 999999 !important;
+    width: 88%;
+    max-width: 380px;
     box-sizing: border-box;
-    white-space: nowrap;
+    white-space: normal; /* Перенос строк на мобильном */
 }
 
-/* Романтичные кляксы со словами */
+/* 🎨 КЛЯКСЫ: БЕЗ ДЁРГАНИЙ И СКАЧКОВ ВВЕРХ-ВНИЗ */
 .love-blob {
     position: fixed;
+    top: 0;
+    left: 0;
     z-index: 9999;
-    padding: 12px 24px;
-    border-radius: 30px;
+    padding: 8px 16px;
     color: white;
-    font-weight: bold;
-    font-size: 22px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    pointer-events: none;
-    animation: popBlob 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
-               floatBlob 3s ease-in-out infinite alternate;
+    font-weight: 800;
+    font-size: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    
+    pointer-events: auto;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+
+    display: inline-block;
+    white-space: nowrap;
+    will-change: transform;
+    transform-origin: center center;
+
+    /* ВАЖНО: Анимацию полностью убираем отсюда, движение контролирует только JS */
+    animation: none !important;
 }
 
-@keyframes popBlob {
-    0% {
-        transform: scale(0) rotate(-15deg);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1) rotate(var(--rot, 0deg));
-        opacity: 0.95;
-    }
-}
-
-@keyframes floatBlob {
-    0% {
-        transform: translateY(0px) rotate(var(--rot, 0deg));
-    }
-    100% {
-        transform: translateY(-12px) rotate(var(--rot, 0deg));
-    }
+.love-blob.dragging {
+    cursor: grabbing !important;
+    z-index: 100000 !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4) !important;
+    filter: brightness(1.1);
 }
